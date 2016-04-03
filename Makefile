@@ -539,7 +539,6 @@ SKIA_FONTS_CXX_SRC = \
 endif
 
 SKIA_SRC = \
-	src/skia-c.cpp \
 	$(SKIA_CORE_CXX_SRC) \
 	$(SKIA_EFFECTS_CXX_SRC) \
 	$(SKIA_FONTS_CXX_SRC) \
@@ -629,7 +628,6 @@ $(OUT_DIR)/%.o: %.c $(OUT_DIR)/src/ports/SkAtomics_sync.h
 $(OUT_DIR)/%.o: %.S $(OUT_DIR)/src/ports/SkAtomics_sync.h
 	mkdir -p `dirname $@` && $(CXX) -c $(CXXFLAGS) $(PROCESSOR_EXTENSION_CXXFLAGS) -o $@ $<
 
-$(OUT_DIR)/libskia.a: $(SKIA_OBJS) src/skia-c.h
+$(OUT_DIR)/libskia.a: $(SKIA_OBJS)
 	cp -R include $(OUT_DIR)
-	cp src/skia-c.h $(OUT_DIR)/include
 	cd $(OUT_DIR) && $(AR) rcs $(subst $(OUT_DIR)/,,$@) $(subst $(OUT_DIR)/,,$(SKIA_OBJS))
